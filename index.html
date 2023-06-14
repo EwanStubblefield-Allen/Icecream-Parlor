@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Reenie+Beanie&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Ice Cream Parlor</title>
+</head>
+
+<style>
+  body.debug .container,
+  body.debug .container-fluid {
+    outline: 2px double blue;
+    outline-offset: -2px;
+  }
+
+  body.debug .row {
+    outline: 2px dashed red;
+    outline-offset: -2px;
+  }
+
+  body.debug [class*="col-"] {
+    outline: 2px dotted forestgreen;
+    outline-offset: -3px;
+  }
+</style>
+
+<body class="debug">
+  <main class="container-fluid">
+
+    <!-- SECTION Cart -->
+    <section class="row p-3">
+      <div class="col-md-6 bg-white">
+        <div class="h-100 d-flex flex-column justify-content-between">
+          <div>
+            <section class="row text-info">
+              <div class="col-6 cart">
+                <h3>Name</h3>
+              </div>
+              <div class="col-6 d-flex justify-content-between">
+                <h3>Qty</h3>
+                <h3>Each</h3>
+                <h3>Total</h3>
+              </div>
+            </section>
+            <section id="cart" class="row">
+            </section>
+          </div>
+          <div class="col-12 text-end p-3 fs-5">
+            <p>Total: $<span id="total">0.00</span></p>
+            <button onclick="pay()" class="btn btn-info px-4 text-white">PAY</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION Ingredients -->
+      <div class="col-md-6 ingredients">
+        <!-- SECTION Toppings -->
+        <p class="title-text">Topping</p>
+        <section class="row justify-content-around">
+          <div class="col-md-4 p-2">
+            <button onclick="addIngredient('toppings', 'Sprinkles')" class="card menu-card p-2">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Sprinkles2.jpg" class="menu-img"
+                alt="sprinkles">
+              <div class="card-body p-1">
+                <p class="card-title">
+                  Sprinkles
+                  <span>$0.25</span>
+                </p>
+              </div>
+            </button>
+          </div>
+          <div class="col-md-4 p-2">
+            <button onclick="addIngredient('toppings', 'Chocolate Chips')" class="card menu-card p-2">
+              <img
+                src="https://www.eatthis.com/wp-content/uploads/sites/4/2020/05/chocolate-chips.jpg?quality=82&strip=1&resize=640%2C360"
+                class="menu-img" alt="chocolate chips">
+              <div class="card-body p-1">
+                <p class="card-title">
+                  Chocolate Chips
+                  <span>$0.25</span>
+                </p>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        <!-- SECTION Ice Cream -->
+        <p class="title-text">Ice Cream</p>
+        <section class="row justify-content-around">
+          <div class="col-md-4 p-2">
+            <button onclick="addIngredient('iceCream', 'Cookie Dough')" class="card menu-card p-2">
+              <img src="https://celebratingsweets.com/wp-content/uploads/2014/04/Cookie-Dough-Ice-Cream-1-5.jpg"
+                class="menu-img" alt="cookie dough">
+              <div class="card-body p-1">
+                <p class="card-title">
+                  Cookie Dough
+                  <span>$1.25</span>
+                </p>
+              </div>
+            </button>
+          </div>
+          <div class="col-md-4 p-2">
+            <button onclick="addIngredient('iceCream', 'Vanilla')" class="card menu-card p-2">
+              <img
+                src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ultimate-vanilla-ice-cream-1628511695.jpg"
+                class="menu-img" alt="vanilla">
+              <div class="card-body p-1">
+                <p class="card-title">
+                  Vanilla
+                  <span>$1.00</span>
+                </p>
+              </div>
+            </button>
+          </div>
+          <div class="col-md-4 p-2">
+            <button onclick="addIngredient('iceCream', 'Strawberry')" class="card menu-card p-2">
+              <img src="https://www.realfoodwithjessica.com/wp-content/uploads/2017/07/paleostrawberryicecream2.jpg"
+                class="menu-img" alt="strawberry">
+              <div class="card-body p-1">
+                <p class="card-title">
+                  Strawberry
+                  <span>$1.25</span>
+                </p>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        <!-- SECTION Vessels -->
+        <p class="title-text">Vessels</p>
+        <section class="row justify-content-around">
+          <div class="col-md-4 p-2">
+            <button onclick="addIngredient('container', 'Waffle Cone')" class="card menu-card p-2">
+              <img src="https://m.media-amazon.com/images/I/71VNjBMakfL._SL1500_.jpg" class="menu-img"
+                alt="waffle cone">
+              <div class="card-body p-1">
+                <p class="card-title">
+                  Waffle Cone
+                  <span>$2.00</span>
+                </p>
+              </div>
+            </button>
+          </div>
+          <div class="col-md-4 p-2">
+            <button onclick="addIngredient('container', 'Waffle Bowl')" class="card menu-card p-2">
+              <img src="http://images.wbmason.com/350/L_JOY66050.jpg" class="menu-img" alt="waffle bowl">
+              <div class="card-body p-1">
+                <p class="card-title">
+                  Waffle Bowl
+                  <span>$4.00</span>
+                </p>
+              </div>
+            </button>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
